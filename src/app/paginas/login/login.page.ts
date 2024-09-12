@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
       //Almacenar usuario en local storage
       this.errorMessage = ''; // Limpiar mensaje de error
       localStorage.setItem('usuario', this.cliente.user);
+      //Almacenar token
       localStorage.setItem('token','some-auth-token');
       this.router.navigate(['/home']);
       return true;
@@ -38,5 +39,9 @@ export class LoginPage implements OnInit {
       this.errorMessage = "Usuario o contraseña incorrecta";
       return false;
     }
+  }
+  irARegistro() {
+    //Navegar a la pag de registro
+    this.router.navigate(['/registro']);
   }
 }

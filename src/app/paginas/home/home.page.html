@@ -10,23 +10,32 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Concierto Indie</ion-card-title>
+      <ion-card-title>Seleccione un evento</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Fecha: 20 de Octubre 2024</p>
-      <p>Hora: 8:00 PM</p>
-      <p>Precio por entrada: {{ precioEntrada }} CLP</p>
-      
-      <ion-item>
-        <ion-label position="floating">Cantidad de entradas</ion-label>
-        <ion-input [(ngModel)]="cantidadEntradas" type="number" min="1"></ion-input>
-      </ion-item>
-      
-      <p>Total a pagar: {{ totalPagar }} CLP</p>
+    <ion-item>
+      <ion-label>Evento</ion-label>
+      <ion-select>[(ngModel)]="selectedEvento" (ionChange)="eventoSeleccionado()"
+        <ion-select-option *ngFor="let evento of eventos" [value]= "evento"> {{ evento.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-      <ion-button (click)="comprarEntradas()">Comprar</ion-button>
+    <p *ngIf="selectedEvento">Fecha: {{selectedEvento.fecha}}</p>
+    <p *ngIf="selectedEvento">Hora: {{selectedEvento.hora}}</p>
+    <p *ngIf="selectedEvento">Precio por entrada: {{selectedEvento.precio}} CLP</p>
 
-      <ion-text color="success" *ngIf="compraExitosa">{{mensajeExito}}</ion-text>
+    <ion-item *ngIf="selectedEvento">
+      <ion-label position="floating">Cantidad de entradas</ion-label>
+      <ion-input> [(ngModel)]="cantidadEntradas" type="number" min="1"</ion-input>
+    </ion-item>
+
+    <p *ngIf="selectedEvento">Total a pagar: {{totalPagar}} CLP</p>
+
+    <ion-button (click)="comprarEntradas()">Comprar</ion-button>
+    <ion-text color="success" *ngIf="compraExitosa">{{mensajeExito}}</ion-text>
     </ion-card-content>
-  </ion-card>
-</ion-content>
+    </ion-card>
+    </ion-content>
+
+
+
