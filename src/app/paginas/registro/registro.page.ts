@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -17,7 +18,7 @@ export class RegistroPage implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
@@ -42,8 +43,15 @@ export class RegistroPage implements OnInit {
       return;
     }
 
+    //Guardar los datos del usuario en localStorage
+    localStorage.setItem(this.registro.rut, JSON.stringify(this.registro));
+
     // Simular registro exitoso
     this.successMessage = `¡Registro exitoso! Bienvenido, ${this.registro.nombre}.`;
     this.errorMessage = '';
+
+    //Redirigir al login post registro
+    this.router.navigate(['/login']);
   }
+
 }

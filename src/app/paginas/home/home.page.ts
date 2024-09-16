@@ -22,7 +22,7 @@ export class HomePage {
 
   constructor() {}
   ngOnInit(){
-    this.usuario = localStorage.getItem('user') || 'Invitado'; 
+    this.usuario = localStorage.getItem('usuario') || 'Invitado'; 
     this.calcularTotal();
   }
 

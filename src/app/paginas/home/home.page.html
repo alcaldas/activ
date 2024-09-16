@@ -15,7 +15,7 @@
     <ion-card-content>
     <ion-item>
       <ion-label>Evento</ion-label>
-      <ion-select>[(ngModel)]="selectedEvento" (ionChange)="eventoSeleccionado()"
+      <ion-select [(ngModel)]="selectedEvento" (ionChange)="eventoSeleccionado()">
         <ion-select-option *ngFor="let evento of eventos" [value]= "evento"> {{ evento.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -26,7 +26,7 @@
 
     <ion-item *ngIf="selectedEvento">
       <ion-label position="floating">Cantidad de entradas</ion-label>
-      <ion-input> [(ngModel)]="cantidadEntradas" type="number" min="1"</ion-input>
+      <ion-input [(ngModel)]="cantidadEntradas" type="number" min="1"></ion-input>
     </ion-item>
 
     <p *ngIf="selectedEvento">Total a pagar: {{totalPagar}} CLP</p>

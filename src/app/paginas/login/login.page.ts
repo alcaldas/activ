@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  cliente={user:'',password:''}
+  login={user:'',password:''}
   errorMessage:string='';
   Message:string='';
   constructor(private router:Router) { }
@@ -15,22 +15,27 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   onSubmit(): boolean {
+    const usuario = localStorage.getItem(this.login.rut);
+    if(!usuario) {
+      this.errorMessage = 'RUT no encontrado'
+    }
+
     //Verificar valores
-    console.log('Usuario ingresado: ', this.cliente.user);
-    console.log('Contraseña ingresada: ', this.cliente.password)
+    console.log('Usuario ingresado: ', this.login.user);
+    console.log('Contraseña ingresada: ', this.login.password)
 
 
     // Validar si los campos están vacíos
-    if (!this.cliente.user || !this.cliente.password) {
+    if (!this.login.user || !this.login.password) {
       this.errorMessage = "Todos los campos son obligatorios";
       return false;
     }
 
     //Validación de Usuario
-     if (this.cliente.user === 'admin' && this.cliente.password === 'admin') {
+     if (this.login.user === 'admin' && this.login.password === 'admin') {
       //Almacenar usuario en local storage
       this.errorMessage = ''; // Limpiar mensaje de error
-      localStorage.setItem('usuario', this.cliente.user);
+      localStorage.setItem('usuario', this.login.user);
       //Almacenar token
       localStorage.setItem('token','some-auth-token');
       this.router.navigate(['/home']);
